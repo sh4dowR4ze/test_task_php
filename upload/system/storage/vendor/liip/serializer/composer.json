@@ -1,0 +1,67 @@
+{
+    "name": "liip/serializer",
+    "description": "High performance serializer that works with code generated helpers to achieve high throughput.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Liip AG",
+            "homepage": "http://www.liip.ch"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/liip/serializer",
+        "issues": "https://github.com/liip/serializer/issues"
+    },
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "liip/metadata-parser": "^1.2",
+        "pnz/json-exception": "^1.0",
+        "symfony/filesystem": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/finder": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/options-resolver": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "twig/twig": "^2.7 || ^3.0"
+    },
+    "require-dev": {
+        "doctrine/collections": "^1.6",
+        "friendsofphp/php-cs-fixer": "^3.23",
+        "jms/serializer": "^1.13 || ^2 || ^3",
+        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^9.6",
+        "rector/rector": "^1.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Liip\\Serializer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Liip\\Serializer\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs:check": "vendor/bin/php-cs-fixer fix --dry-run --diff -v",
+        "cs:fix": "vendor/bin/php-cs-fixer fix -v",
+        "phpstan": "vendor/bin/phpstan analyse --no-progress --level 7 src/",
+        "phpstan-tests": "vendor/bin/phpstan analyse --no-progress --level 1 -c phpstan.tests.neon tests/",
+        "rector:check": "vendor/bin/rector process --dry-run",
+        "rector:fix": "vendor/bin/rector process",
+        "phpstan-all": [
+            "@phpstan",
+            "@phpstan-tests"
+        ],
+        "phpunit": "vendor/bin/phpunit",
+        "ci": [
+            "@cs:check",
+            "@rector:check",
+            "@phpstan-all",
+            "@phpunit"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

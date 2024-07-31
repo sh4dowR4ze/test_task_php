@@ -1,0 +1,9 @@
+includes:
+	- phpstan-baseline-serializer.neon
+	- phpstan-baseline.neon # TODO: This should be removed eventually.
+
+parameters:
+    level: max
+    paths:
+        - src
+        - tests

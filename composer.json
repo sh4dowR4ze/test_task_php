@@ -1,0 +1,30 @@
+{
+    "name": "opencart/opencart",
+    "type": "project",
+    "description": "OpenCart",
+    "keywords": ["opencart", "ecommerce", "framework", "opensource"],
+    "homepage": "http://www.opencart.com",
+    "license": "GPL-3.0+",
+    "config": {
+        "vendor-dir": "./upload/system/storage/vendor/",
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "civicrm/composer-compile-plugin": true
+        }
+    },
+    "require": {
+      "braintree/braintree_php" : "3.40.0",
+      "cardinity/cardinity-sdk-php": "^v2.0",
+      "divido/divido-php": ">=1.15",
+      "php": ">=7.3.0",
+      "scssphp/scssphp": "^1.11.0",
+      "zoujingli/wechat-developer": "^1.2",
+      "twig/twig": "^3.3",
+        "retailcrm/api-client-php": "^6.15",
+        "http-interop/http-factory-guzzle": "*",
+        "php-http/guzzle6-adapter": "^2.0"
+    },
+    "extra": {
+        "compile-whitelist": ["retailcrm/api-client-php"]
+    }
+}
