@@ -92,7 +92,20 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		    // обработка POST данных
+			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+				$delivery_date = isset($this->request->post['delivery_date']) ? $this->request->post['delivery_date'] : '';
+				$delivery_time = isset($this->request->post['delivery_time']) ? $this->request->post['delivery_time'] : '';
+				$call_before = isset($this->request->post['call_before']) ? 1 : 0;
+		
+				// cохранение данных в сессию или другую структуру данных
+				$this->session->data['delivery_date'] = $delivery_date;
+				$this->session->data['delivery_time'] = $delivery_time;
+				$this->session->data['call_before'] = $call_before;}
+
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
+
+		
 	}
 
 	public function country() {
