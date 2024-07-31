@@ -26,6 +26,25 @@
 <p>
   <textarea name="comment" rows="8" class="form-control">{{ comment }}</textarea>
 </p>
+
+<!-- Новые поля для даты и времени доставки, а также чекбокс -->
+<div class="form-group">
+  <label for="delivery_date">{{ text_delivery_date }}</label>
+  <input type="date" name="delivery_date" id="delivery_date" class="form-control" value="{{ delivery_date }}" />
+</div>
+
+<div class="form-group">
+  <label for="delivery_time">{{ text_delivery_time }}</label>
+  <input type="time" name="delivery_time" id="delivery_time" class="form-control" value="{{ delivery_time }}" />
+</div>
+
+<div class="form-group">
+  <label>
+    <input type="checkbox" name="call_before" id="call_before" {% if call_before %} checked="checked" {% endif %} />
+    {{ text_call_before }}
+  </label>
+</div>
+
 <div class="buttons">
   <div class="pull-right">
     <input type="button" value="{{ button_continue }}" id="button-shipping-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />

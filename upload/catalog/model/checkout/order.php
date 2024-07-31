@@ -386,19 +386,23 @@ class ModelCheckoutOrder extends Model {
 			$this->cache->delete('product');
 		}
 	}
+	public function addOrderData($order_id, $delivery_date, $delivery_time, $call_before) {
+		$this->db->query("UPDATE " . DB_PREFIX . "order SET delivery_date = '" . $this->db->escape($delivery_date) . "', delivery_time = '" . $this->db->escape($delivery_time) . "', call_before = '" . (int)$call_before . "' WHERE order_id = '" . (int)$order_id . "'");
+	}
+	
 // рабочее апишка + отправка на crm
 private function sendOrderToRetailCRM($order_id, $data) {
     $url = 'https://sinevichleha.retailcrm.ru/';
     $api_key = 'Dxg96xIK99qBQ6AQFTHzCmbjMTPtxWJC'; 
 
-    // Добавьте новые поля в $payload
     $payload = array(
-        'order_id'      => $order_id,
-        'status'        => 'new',
-        'details'       => $data,
-        'delivery_date' => isset($data['delivery_date']) ? $data['delivery_date'] : '',
-        'delivery_time' => isset($data['delivery_time']) ? $data['delivery_time'] : '',
-        'pre_call'      => isset($data['pre_call']) ? $data['pre_call'] : 0
+        'order_id' => $order_id,
+        'status'   => 'new',
+        'details'  => array(
+            'delivery_date' => $data['delivery_date'],
+            'delivery_time' => $data['delivery_time'],
+            'call_before'   => $data['call_before']
+        )
     );
 
     $ch = curl_init($url);
